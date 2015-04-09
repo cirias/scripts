@@ -44,6 +44,7 @@ conn.query("SELECT u.office_phone AS uofficephone, u.mobile_phone AS umobilephon
       });
     });
 
+    client.end();
     conn.end();
 });
 
