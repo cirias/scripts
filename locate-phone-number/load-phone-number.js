@@ -1,10 +1,5 @@
 var mysql = require('mysql');
-var conn = mysql.createConnection({
-    host: '',
-    user: '',
-    password: '',
-    database: ''
-  });
+var conn = mysql.createConnection(JSON.parse(process.env.TS_MYSQL_CONFIG));
 conn.connect();
 
 var redis = require('redis');
