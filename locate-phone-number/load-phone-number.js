@@ -1,5 +1,10 @@
 var mysql = require('mysql');
-var conn = mysql.createConnection(JSON.parse(process.env.TS_MYSQL_CONFIG));
+try {
+  var config = JSON.parse(process.env.TS_MYSQL_CONFIG);
+} catch (err) {
+  throw new Error('Please check your environment TS_MYSQL_CONFIG');
+}
+var conn = mysql.createConnection(config);
 conn.connect();
 
 var redis = require('redis');
@@ -48,8 +53,12 @@ function parse (number) {
     return
   }
 
+  var regx = /^1\d{9,10}$/;
   if (typeof number == 'number') {
-    return number.toString().replace(/^86/, '');
+     number =  number.toString().replace(/^86/, '');
+     if (regx.exec(number) != null){
+       return number;
+     };
   } else if (typeof number == 'string') {
     number = number.trim();
     if (!number) {
@@ -61,7 +70,11 @@ function parse (number) {
       return
     }
 
-    return number.toString().replace(/^86/, '');
+    number = number.toString().replace(/^86/, '');
+    if (regx.exec(number) == null){
+      return 
+    }
+    return number;
   } else {
     throw new Error('Unknow type of number');
   }
