@@ -5,6 +5,9 @@
 
 Modify `load-phone-number.js` to put the mysql config.
 
+### 
+Run export TS_MYSQL_CONFIG='{"host":"srv-tradesparq-rds-master.cmpvkt6xbzj6.us-west-2.rds.amazonaws.com","user":"sanfordi","password":"Gcn392jFa","database":"sanfordi"}'
+
 ### Usage
 
 Load phone numbers to redis:
